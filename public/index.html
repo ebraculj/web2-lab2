@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Testiranje XSS napada</title>
 </head>
 <body>
@@ -41,7 +41,7 @@
     <hr><hr>
 
     <section>
-        <h2>Nesigurna pohrana osjetljivih podataka</h2>
+        <h2>Nesigurna pohrana osjetljivih podataka(Sensitive Data Exposure)</h2>
         <h3>Opis rada sustava</h3>
         <p>
             Ovaj servis prikazuje kako funkcionira napad na osjetljive podatke kada oni nisu adekvatno pohranjeni. Kako bi se izbjegao ovaj napad 
@@ -59,49 +59,7 @@
             lozinka je sačuvana otklonjena je ranjivost nesigurne pohrane osjetljivih podataka(Sensitive Data Exposure).
         </p>
     </section>
-
-    <script>
-        // XSS
-        const enableXSSCheckbox = document.getElementById('XSSTrue');
-        const xssForm = document.getElementById('xss');
-        const xssInput = document.getElementById('xssInput');
-        const xssOutput = document.getElementById('xssOutput');
-        const usernameInput = document.getElementById("usernameInput");
-
-        xssForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const inputValue = xssInput.value;
-            //je li napad omogucen
-            if (enableXSSCheckbox.checked) {
-                // ako je, izvrsi 
-                xssOutput.innerHTML = inputValue;  //prikazivanje komentara - moguce izvrsavanje
-                const username = usernameInput.value;
-
-                //alert s podacima
-                alert("NAPADNUTI STE!\nXSS napad pokrenut!\n" +
-                      "Korisničko ime: " + username + "\n" + 
-                      "Komentar: " + inputValue);
-            } else {
-                //ako nije omogucen sanitiziraj i prikazi
-                const sanitizedInput = sanitizeText(inputValue);
-                xssOutput.innerText = "XSS napad nije moguć.\n Sanitizirani unos: " + sanitizedInput;
-            }
-        });
-
-        //sanitizacija - zamjena spec znakova
-        function sanitizeText(input) {
-            return input.replace(/[&<>"'/]/g, function(match) {
-                switch(match) {
-                    case '&': return '&amp;';
-                    case '<': return '&lt;';
-                    case '>': return '&gt;';
-                    case '"': return '&quot;';
-                    case "'": return '&#39;';
-                    case '/': return '&#47;';
-                    default: return match;
-                }
-            });
-        }
-    </script>
+    <script src="js/script.js"></script>
+       
 </body>
 </html>
