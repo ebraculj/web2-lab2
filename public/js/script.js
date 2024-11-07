@@ -36,7 +36,7 @@ xssForm.addEventListener('submit', async (e) => {
 
     try {
         const result = await sendDataToBackend(username, comment, enableXSS);
-        console.log("Komentar s backend-a: ", result.data.comment); // Provjera što dolazi u frontend
+        //console.log("Komentar s backend-a: ", result.data.comment); 
 
         if (enableXSS) {
             console.log("Prije inner: ", result.data.comment);
