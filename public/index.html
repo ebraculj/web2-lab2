@@ -29,7 +29,7 @@
             <br><br>
             <label>Komentar: </label>
             <input type="text" id="xssInput" placeholder="Unesite svoj komentar">
-            <button type="submit">Pošaljite</button>
+            <button type="submit">Pošalji</button>
         </form>
         <br>
         <label>
@@ -58,6 +58,20 @@
             napad onemogućen podaci će se spremati hashirani pomoću SHA256 koji je zapravo algoritam koji za lozinku računa hash vrijednost i pohranjuje ju kao 64 bitovni podatak. Na taj način 
             lozinka je sačuvana otklonjena je ranjivost nesigurne pohrane osjetljivih podataka(Sensitive Data Exposure).
         </p>
+        <br>
+        <form id="sensitivedata">
+            <label>Korisničko ime: </label>
+            <input type="text" id="usernameIn" placeholder="Unesite korisničko ime">
+            <br><br>
+            <label>Lozinka: </label>
+            <input type="password" id="passIn" placeholder="Unesite lozinku">
+            <button type="submit">Pošalji</button>
+        </form>
+        <br>
+        <label>
+            <input type="checkbox" id="sdeTrue"> Omogući nesigurnu pohranu osjetljivih podataka
+        </label>
+        <br>
     </section>
     <script src="js/script.js"></script>
        
