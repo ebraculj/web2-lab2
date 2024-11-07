@@ -44,7 +44,19 @@
         <h2>Nesigurna pohrana osjetljivih podataka</h2>
         <h3>Opis rada sustava</h3>
         <p>
-            
+            Ovaj servis prikazuje kako funkcionira napad na osjetljive podatke kada oni nisu adekvatno pohranjeni. Kako bi se izbjegao ovaj napad 
+            potrebno je ne pohranjivati nepotrebne podatke, koristiti novije algoritme i jake ključeve za šifriranje osjetljivih informacija i nikada se prenositi
+            te podatke kao običan tekst(plaintext). Ako je napad omogućen servis će pohraniti podatke u bazu podataka(u ovom slučaju simulirana kao objek u JavaScriptu, mislim da nije bila potrebna izrada prave baze za 
+            prikazivanje ovog napada, također još uvijek je aktivna baza podataka na Renderu za prvu laboratorijsku vježbu) kao običan tekst i neće ih ni na koji način zaštititi. Ako je uključena zaštita od napada lozinka će se hashirati i pohraniti sigurno i na taj
+            način neće biti izložena i dostupna napadaču.
+        </p>
+        <br>
+        <h3>Testiranje</h3>
+        <p>
+            Ako nije uključena zaštita od napada svi osjetljivi podaci(u ovom slučaju lozinka i korisničko ime) spremaju se kao plaintext, bez ikakve zaštite što ih čini lako dostupnima napadaču. 
+            Osjetljivi podaci će pri slanju(pritisak gumba) biti prikazani u alert prozorčiću čime će biti prikazana ranjivost servisa i uspješnost napada. U slučaju da je
+            napad onemogućen podaci će se spremati hashirani pomoću SHA256 koji je zapravo algoritam koji za lozinku računa hash vrijednost i pohranjuje ju kao 64 bitovni podatak. Na taj način 
+            lozinka je sačuvana otklonjena je ranjivost nesigurne pohrane osjetljivih podataka(Sensitive Data Exposure).
         </p>
     </section>
 
