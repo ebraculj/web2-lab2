@@ -41,36 +41,17 @@ xssForm.addEventListener('submit', async (e) => {
         if (enableXSS) {
             //console.log("Prije inner: ", result.data.comment);
             //tu se zapravo izvrsava js kod
-            xssOutput.innerHTML = `Komentar: ${result.data.comment}`;
+            xssOutput.innerHTML = `Komentar uspješno pohranjen!\nPohranjeni komentar: ${result.data.comment}`;
             //console.log("Nakon innerHTML ", xssOutput.innerHTML);
 
         } else {
             // Ako je XSS onemogućen, koristimo innerText da bi se prikazao siguran tekst
-            xssOutput.innerText = `Komentar: ${result.data.comment}`;
+            xssOutput.innerHTML = `Komentar uspješno pohranjen!\nPohranjeni komentar: ${result.data.comment}`;
         }
     } catch (error) {
         console.error("Greška pri slanju podataka na backend: ", error);
     }
 });
-
-
-
-    /*if (xssButton.checked) {
-        if (containsJsCode(inputValue)){
-            const result = await sendDataToBackend(username, inputValue, true);
-            alert(`XSS napad pokrenut!\nKomentar: ${result.data.comment}\nKorisničko ime: ${result.data.username}`);
-        }
-        else{
-            const result = await sendDataToBackend(username, inputValue, true);
-            xssOutput.innerText = `Komentar: ${result.data.comment}`;
-        }
-        
-    } else {
-        // Pošaljite podatke s onemogućenim XSS
-        const result = await sendDataToBackend(username, inputValue, false);
-        xssOutput.innerText = `Komentar: ${result.data.comment}`;*/
-    //});
-//});
 
 // Lažna baza podataka
 let fakeDatabase = {

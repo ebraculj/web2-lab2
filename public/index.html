@@ -28,20 +28,20 @@
             Ranjivost nije omogućena: <br>
                 <strong>Username:</strong> admin <br>
                 <strong>Komentar:</strong> Moj komentar! <br>
-                <strong>rezultat:</strong> - pojavljuje se tekst komentara ispod forme<br><br>
+                <strong>Rezultat:</strong> - pojavljuje se tekst komentara ispod forme<br><br>
 
                 <strong>Username:</strong> ela<br>
                 <strong>Komentar:</strong>&lt;img src=&quot;x&quot; onerror=&quot;alert(&#39;XSS napad!&#39;)&quot;&gt;                <br>
-                <strong>rezultat:</strong> - pojavjuje se sanitizirani tekst komentara(specijali znakovi zamijenjeni znakovnim entitetima)<br><br>
+                <strong>Rezultat:</strong> - pojavjuje se sanitizirani tekst komentara(specijali znakovi zamijenjeni znakovnim entitetima)<br><br>
 
             Ranjivost omogućena:<br>
             <strong>Username:</strong> admin<bR>
                 <strong>Komentar</strong> Hajduk živi vječno<br>
-                <strong>rezultat</strong> - pojavljue se tekst komentara ispod forme<br><br>
+                <strong>Rezultat</strong> - pojavljue se tekst komentara ispod forme<br><br>
 
                 <strong>Username</strong> ela<br>
                 <strong>Komentar</strong> &lt;img src=&quot;x&quot; onerror=&quot;alert(&#39;XSS napad!&#39;)&quot;&gt;                <br>
-                <strong>rezultat</strong> - zbog neuspješnog dohvata slike prebacuje se na onError dio koda koji izaziva otvaranje alert prozora s tekstom "XSS napad!"<br><br>
+                <strong>Rezultat</strong> - zbog neuspješnog dohvata slike prebacuje se na onError dio koda koji izaziva otvaranje alert prozora s tekstom "XSS napad!"<br><br>
 
         </p>
         <br>
@@ -58,6 +58,7 @@
         <label>
             <input type="checkbox" id="XSSTrue"> Omogući XSS napad
         </label>
+        <br><br>
         <div id="xssOutput"></div>
     </section>
 
@@ -84,17 +85,17 @@
         <br>
         <form id="sensitiveData">
             <label>Korisničko ime: </label>
-            <input type="text" id="usernameIn" placeholder="Unesite korisničko ime">
+            <input type="text" id="usernameIn" placeholder="Unesite korisničko ime" required>
             <br><br>
             <label>Lozinka: </label>
-            <input type="password" id="passIn" placeholder="Unesite lozinku">
+            <input type="password" id="passIn" placeholder="Unesite lozinku" required>
             <button type="submit">Pošalji</button>
         </form>
         <br>
         <label>
             <input type="checkbox" id="sdeTrue"> Omogući nesigurnu pohranu osjetljivih podataka
-        </label>
-        <p id="sdeOut"></p>
+        </label><br><br>
+        <div id="sdeOut"></div>
         <br>
     </section>
     <script src="/js/script.js"></script>
