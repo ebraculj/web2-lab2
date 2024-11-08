@@ -26,20 +26,20 @@
         <p>
             <h4>Primjer testiranja:</h4>
             Ranjivost nije omogućena: <br>
-                <strong>Username:</strong> admin <br>
+                <strong>Username:</strong> elabr <br>
                 <strong>Komentar:</strong> Moj komentar! <br>
                 <strong>Rezultat:</strong> - pojavljuje se tekst komentara ispod forme<br><br>
 
-                <strong>Username:</strong> ela<br>
+                <strong>Username:</strong> elabr<br>
                 <strong>Komentar:</strong>&lt;img src=&quot;x&quot; onerror=&quot;alert(&#39;XSS napad!&#39;)&quot;&gt;                <br>
                 <strong>Rezultat:</strong> - pojavjuje se sanitizirani tekst komentara(specijali znakovi zamijenjeni znakovnim entitetima)<br><br>
 
             Ranjivost omogućena:<br>
-            <strong>Username:</strong> admin<bR>
+            <strong>Username:</strong> marko2<bR>
                 <strong>Komentar</strong> Hajduk živi vječno<br>
                 <strong>Rezultat</strong> - pojavljue se tekst komentara ispod forme<br><br>
 
-                <strong>Username</strong> ela<br>
+                <strong>Username</strong> marko2<br>
                 <strong>Komentar</strong> &lt;img src=&quot;x&quot; onerror=&quot;alert(&#39;XSS napad!&#39;)&quot;&gt;                <br>
                 <strong>Rezultat</strong> - zbog neuspješnog dohvata slike prebacuje se na onError dio koda koji izaziva otvaranje alert prozora s tekstom "XSS napad!"<br><br>
 

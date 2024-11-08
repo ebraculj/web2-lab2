@@ -6,10 +6,15 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
-// Umjesto body-parsera, koristi express.json()
 app.use(express.json());
 
-let comments = []
+let fakeDatabase = {
+    users: [
+        { username: "elabr", comments: [] },
+        { username: "marko2", comments: [] },
+        { username: "ivana", comments: [] }
+    ]
+};
 
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -26,20 +31,26 @@ function sanitize(comment) {
         .replace(/'/g, "&#39;");
 }
 
+
 app.post('/api/comments', (req, res) => {
     const { username, comment, enableXSS } = req.body;
 
+    const user = fakeDatabase.users.find(u => u.username === username)
+
+    if (!user){
+        return res.status(404).json({message :"Korisnik s tim korisničkim imenom ne postoji!"})
+    }
+
     if (enableXSS === true) {
         //samo spremi kako je predano
-        //console.log("prije " + comment)
-        comments.push({ username, comment });
+        user.comments.push(comment);
         res.status(200).send({ message: "Podaci su pohranjeni bez provjere (XSS omogućen).", data: { username, comment } });
-        //console.log("prije " + comment)
     } 
     else {
         // Ako XSS nije moguc, sanitiziraj komentar
         const sanitizedComment = sanitize(comment);
-        comments.push({ username, comment: sanitizedComment });
+        user.comments.push(sanitizedComment);
+        console.log(sanitizedComment);
         res.status(200).send({ message: "Komentar je sanitiziran i pohranjen (XSS onemogućen)", data: { username, comment: sanitizedComment } });
     }
 });
