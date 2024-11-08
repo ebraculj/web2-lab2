@@ -39,7 +39,7 @@ xssForm.addEventListener('submit', async (e) => {
         //console.log("Komentar s backend-a: ", result.data.comment); 
 
         if (enableXSS) {
-            console.log("Prije inner: ", result.data.comment);
+            //console.log("Prije inner: ", result.data.comment);
             //tu se zapravo izvrsava js kod
             xssOutput.innerHTML = `Komentar: ${result.data.comment}`;
             //console.log("Nakon innerHTML ", xssOutput.innerHTML);
