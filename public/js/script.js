@@ -55,10 +55,6 @@ xssForm.addEventListener('submit', async (e) => {
     }
 });
 
-// lazna baza podataka
-let fakeDatabase = {
-    users: []
-};
 
 // Funkcija za hashiranje lozinke
 async function hashPassword(password) {
