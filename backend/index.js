@@ -8,6 +8,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+//baza za xss
 let fakeDatabase = {
     users: [
         { username: "elabr", comments: [] },
@@ -15,6 +16,15 @@ let fakeDatabase = {
         { username: "ivana", comments: [] }
     ]
 };
+
+//baza za sde
+let userDatabase = {
+    users: [
+        { username: "elabr", password: "hajduk1911" }, 
+        {username: "marko2", password: "lozinka"}
+    ]
+};
+
 
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -55,6 +65,7 @@ app.post('/api/comments', (req, res) => {
     }
 });
 
+
 app.get('/api/comments', (req, res) => {
     res.status(200).json(comments);
 });
@@ -63,3 +74,20 @@ app.get('/api/comments', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+/*aj ispocetka cemo...ovo mi je index.html koji je odgovoran za taj sensitive data exposure:
+ <form id="sensitiveData">
+            <label>Korisničko ime: </label>
+            <input type="text" id="usernameIn" placeholder="Unesite korisničko ime" required>
+            <br><br>
+            <label>Lozinka: </label>
+            <input type="password" id="passIn" placeholder="Unesite lozinku" required>
+            <button type="submit">Pošalji</button>
+        </form>
+        <br>
+        <label>
+            <input type="checkbox" id="sdeTrue"> Omogući nesigurnu pohranu osjetljivih podataka
+        </label><br><br>
+        <div id="sdeOut"></div>
+
+i sad bi ja laznu pazu podataka s pohranjenin usernameon i onda se pri unosu podataka pregledava jel taj username u toj bazi...ako nije napisi u innerhtml da taj korisnik ne postoji, a ako postoji u toj laznoj bazi onda ako je checkbox oznacen pohrani lozinku kao obicni tekst i u innnehtml napisi da je spremljena lozinka bez hashiranja i zastite i ispisi korisnicko ime i lozinku, a ako je iskljucen checkbix onda hashiraj lozinku i spremi je tako i ispsi da je spremljena sa zastitiom i napisi koako je psremljena*/ 
