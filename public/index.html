@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="css/style.css">
+
     <title>Testiranje XSS napada</title>
 </head>
 <body>
@@ -28,30 +30,31 @@
             Ranjivost nije omogućena: <br>
                 <strong>Username:</strong> elabr <br>
                 <strong>Komentar:</strong> Moj komentar! <br>
-                <strong>Rezultat:</strong> - pojavljuje se tekst komentara ispod forme<br><br>
+                <strong>Rezultat:</strong>  pojavljuje se tekst komentara ispod forme<br><br>
 
                 <strong>Username:</strong> elabr<br>
                 <strong>Komentar:</strong>&lt;img src=&quot;x&quot; onerror=&quot;alert(&#39;XSS napad!&#39;)&quot;&gt;                <br>
-                <strong>Rezultat:</strong> - pojavjuje se sanitizirani tekst komentara(specijali znakovi zamijenjeni znakovnim entitetima)<br><br>
+                <strong>Rezultat:</strong>  pojavjuje se sanitizirani tekst komentara(specijali znakovi zamijenjeni znakovnim entitetima)<br><br>
 
             Ranjivost omogućena:<br>
             <strong>Username:</strong> marko2<bR>
                 <strong>Komentar</strong> Hajduk živi vječno<br>
-                <strong>Rezultat</strong> - pojavljue se tekst komentara ispod forme<br><br>
+                <strong>Rezultat</strong>  pojavljue se tekst komentara ispod forme<br><br>
 
                 <strong>Username</strong> marko2<br>
                 <strong>Komentar</strong> &lt;img src=&quot;x&quot; onerror=&quot;alert(&#39;XSS napad!&#39;)&quot;&gt;                <br>
-                <strong>Rezultat</strong> - zbog neuspješnog dohvata slike prebacuje se na onError dio koda koji izaziva otvaranje alert prozora s tekstom "XSS napad!"<br><br>
+                <strong>Rezultat</strong>  zbog neuspješnog dohvata slike prebacuje se na onError dio koda koji izaziva otvaranje alert prozora s tekstom "XSS napad!"<br>
+                <br>Pri unosu bilo kojeg korisničkog imena koje se ne nalazi u bazi podataka ispisuje se poruka "Korisnik s tim korisničkim imenom ne postoji!"<br>
 
         </p>
         <br>
 
         <form id="xss">
             <label>Korisničko ime: </label>
-            <input id="usernameInput" type="text" placeholder="Unesite korisničko ime">
+            <input id="usernameInput" type="text" placeholder="Unesite korisničko ime" required>
             <br><br>
             <label>Komentar: </label>
-            <input type="text" id="xssInput" placeholder="Unesite svoj komentar">
+            <input type="text" id="xssInput" placeholder="Unesite svoj komentar" required>
             <button type="submit">Pošalji</button>
         </form>
         <br>
@@ -83,6 +86,22 @@
             lozinka je sačuvana otklonjena je ranjivost nesigurne pohrane osjetljivih podataka(Sensitive Data Exposure).
         </p>
         <br>
+        <p>
+            <h4>Primjer testiranja:</h4>
+            Ranjivost nije omogućena: <br>
+                <strong>Username:</strong> elabr <br>
+                Uz unos bilo koje lozinke pojavljuje se tekst kako je lozinka pohranjena hashirana i prikazuje se tocno u kojem je obliku pohranjena.
+
+
+
+            Ranjivost omogućena:<br>
+            <strong>Username:</strong> marko2<bR>
+                Uz unos bilo koje lozinke pojavljuje se tekst kako je lozinka pohranjena kao obični tekst(plaintext) i prikazuje se pohranjena lozinka u izvornom obliku.
+                <br>
+
+            <br>Pri unosu bilo kojeg korisničkog imena koje se ne nalazi u bazi podataka ispisuje se poruka "Korisnik s tim korisničkim imenom ne postoji!" <br>
+
+        </p>
         <form id="sensitiveData">
             <label>Korisničko ime: </label>
             <input type="text" id="usernameIn" placeholder="Unesite korisničko ime" required>
