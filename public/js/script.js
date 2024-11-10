@@ -1,5 +1,5 @@
 async function sendDataToBackend(username, comment, enableXSS) {
-    const response = await fetch('http://localhost:3000/api/comments', {
+    const response = await fetch('https://web2-lab2-xynr.onrender.com/api/comments', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ async function sendDataToBackend(username, comment, enableXSS) {
 
 async function sendDataToBackendSDE(username, password, enableSDE){
 
-        const response = await fetch(`http://localhost:3000/api/loginCheck`, {
+        const response = await fetch(`https://web2-lab2-xynr.onrender.com/api/loginCheck`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
