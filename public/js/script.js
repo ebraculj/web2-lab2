@@ -45,19 +45,25 @@ xssForm.addEventListener('submit', async (e) => {
     const enableXSS = xssButton.checked;
 
     try {
+        //console.log("poslano: ", {username, comment, enableXSS})
         const result = await sendDataToBackend(username, comment, enableXSS);
+        console.log(result);
         if (result.message === "Korisnik s tim korisničkim imenom ne postoji!") {
             xssOutput.innerHTML = `<span style="color: red;">Korisnik ne postoji.</span>`;
             return;
         }
-
-        if (enableXSS) {
-            // XSS aktivan, izvrši JavaScript kod (potencijalno opasno)
+        if (result.data && result.data.comment){
+            if (enableXSS) {
             xssOutput.innerHTML = `Komentar uspješno pohranjen!\nPohranjeni komentar: ${result.data.comment}`;
-        } else {
-            // XSS nije aktivan, komentari su pohranjeni sigurno
+        } 
+        else {
             xssOutput.innerText = `Komentar uspješno pohranjen!\nPohranjeni komentar: ${result.data.comment}`;
         }
+        }else{
+            console.log("Došlo je dogreške pri dohvaćanju podataka");
+        }
+
+        
     } catch (error) {
         console.error("Greška pri slanju podataka na backend: ", error);
         xssOutput.innerText = "Došlo je do greške pri slanju podataka.";
@@ -65,7 +71,7 @@ xssForm.addEventListener('submit', async (e) => {
 });
 
 
-// Sensitive Data Exposure (SDE) dio
+// Sensitive Data Exposure (SDE) 
 const enableSde = document.getElementById('sdeTrue');
 const userDataForm = document.getElementById('sensitiveData');
 const usernameInputDB = document.getElementById('usernameIn');
@@ -87,11 +93,11 @@ userDataForm.addEventListener('submit', async (e) => {
             return;
         }
         else if(response.message == "Lozinka je spremljena kao obični tekst!"){
-            dbOutput.innerText = "Lozinka je spremljena kao obični tekst!\nKorisničko ime: " + username + "\nLozinka: " + response.password;
+            dbOutput.innerText = "Lozinka je spremljena kao obični tekst!\nKorisničko ime: " + username + "\nLozinka: " + response.data.password;
             return;
         }
         else if(response.message == "Lozinka je spremljena kao hashirana!"){
-            dbOutput.innerText = "Lozinka je spremljena kao hashirana!\nKorisničko ime: " + username + "\nLoznika: " + response.password;
+            dbOutput.innerText = "Lozinka je spremljena kao hashirana!\nKorisničko ime: " + username + "\nLoznika: " + response.data.hashedPassword;
             return;
         }
         
